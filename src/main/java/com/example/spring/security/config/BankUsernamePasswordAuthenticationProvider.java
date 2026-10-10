@@ -34,6 +34,8 @@ public class BankUsernamePasswordAuthenticationProvider implements Authenticatio
 
         List<User> users = userRepo.findByEmail(username);
         if(users.size() > 0){
+            System.out.println("Login email: " + username);
+            System.out.println("User found: " + !users.isEmpty());
             if (passwordEncoder.matches(pwd,users.get(0).getPassword())) {
                 List<GrantedAuthority> authorities = new ArrayList<>();
                 authorities.add((new SimpleGrantedAuthority(users.get(0).getRole())));
